@@ -1,13 +1,168 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class TodoListTest {
     @Test
-    public void exampleTest() {
-        String hello = "Hello";
-        Assertions.assertEquals("Hello", hello);
-        Assertions.assertNotEquals("Goodbye", hello);
+    void testGetAll() {
+        TodoList todoList = new TodoList();
+
+        Task task1 = new Task("task1");
+        Task task2 = new Task("task2");
+        Task task3 = new Task("task3");
+
+        todoList.add(task1);
+        todoList.add(task2);
+        todoList.add(task3);
+
+        ArrayList<Task> tasks = todoList.getAll();
+
+        Assertions.assertEquals(tasks.get(0), task1);
+        Assertions.assertEquals(tasks.get(1), task2);
+        Assertions.assertEquals(tasks.get(2), task3);
+    }
+
+    @Test
+    void testAddTask() {
+        TodoList todoList = new TodoList();
+
+        Task task1 = new Task("task1");
+
+        Assertions.assertEquals(task1, todoList.addTask(task1).get(0));
+    }
+
+    @Test
+    void testCompleteTask() {
+        TodoList todoList = new TodoList();
+
+        Task task1 = new Task("task1");
+        todoList.addTask(task1);
+
+        Assertions.assertTrue(todoList.getAll(0).isComplete());
+    }
+
+    @Test
+    void testGetCompleted() {
+        TodoList todoList = new TodoList();
+
+        Task task1 = new Task("task1");
+        Task task2 = new Task("task2");
+        Task task3 = new Task("task3");
+
+        todoList.add(task1);
+        todoList.add(task2);
+        todoList.add(task3);
+
+        todoList.completeTask("task1");
+
+        ArrayList<Task> completed = todoList.getCompleted();
+
+        Assertions.assertEquals("task1", completed.get(0).getName());
+        Assertions.assertEquals(1, completed.size());
+    }
+
+    @Test
+    void testGetIncompleted() {
+        TodoList todoList = new TodoList();
+
+        Task task1 = new Task("task1");
+        Task task2 = new Task("task2");
+        Task task3 = new Task("task3");
+
+        todoList.add(task1);
+        todoList.add(task2);
+        todoList.add(task3);
+
+        todoList.completeTask("task1");
+
+        ArrayList<Task> incompleted = todoList.getIncompleted();
+
+        Assertions.assertEquals("task2", completed.get(0).getName());
+        Assertions.assertEquals("task3", completed.get(1).getName());
+        Assertions.assertEquals(2, completed.size());
+    }
+
+    @Test
+    void testSearch() {
+        TodoList todoList = new TodoList();
+
+        Task task1 = new Task("task1");
+        Task task2 = new Task("task2");
+        Task task3 = new Task("task3");
+
+        todoList.add(task1);
+        todoList.add(task2);
+        todoList.add(task3);
+
+        Assertions.assertTrue(todoList.search("task1"));
+        Assertions.assertFalse(todoList.search("task0"));
+    }
+
+    @Test
+    void testGetAllAscending() {
+        TodoList todoList = new TodoList();
+
+        Task task1 = new Task("a");
+        Task task2 = new Task("b");
+        Task task3 = new Task("c");
+
+        todoList.add(task1);
+        todoList.add(task2);
+        todoList.add(task3);
+
+        ArrayList<Task> tasks = todoList.getAllAscending();
+
+        Assertions.assertEquals("a", tasks.get(0).getName());
+        Assertions.assertEquals("b", tasks.get(1).getName());
+        Assertions.assertEquals("c", tasks.get(2).getName());
+    }
+
+    @Test
+    void testGetAllDescending() {
+        TodoList todoList = new TodoList();
+
+        Task task1 = new Task("a");
+        Task task2 = new Task("b");
+        Task task3 = new Task("c");
+
+        todoList.add(task1);
+        todoList.add(task2);
+        todoList.add(task3);
+
+        ArrayList<Task> tasks = todoList.getAllDescending();
+
+        Assertions.assertEquals("c", tasks.get(0).getName());
+        Assertions.assertEquals("b", tasks.get(1).getName());
+        Assertions.assertEquals("a", tasks.get(2).getName());
+    }
+
+    @Test
+    void testRemoveTask() {
+        TodoList todoList = new TodoList();
+
+        Task task1 = new Task("a");
+        Task task2 = new Task("b");
+        Task task3 = new Task("c");
+
+        todoList.add(task1);
+        todoList.add(task2);
+        todoList.add(task3);
+
+
+        Assertions.assertEquals("b", todoList.removeTask("b").getName());
+
+        ArrayList<Task> tasks = todoList.getAll();
+
+        Assertions.assertEquals(2, tasks.size());
+    }
+
+    @Test
+    void testRemoveTaskThatDoesNotExist() {
+        TodoList todoList = new TodoList();
+
+        Assertions.assertEquals(null, todoList.removeTask("task1"));
     }
 }
