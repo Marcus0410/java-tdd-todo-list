@@ -6,9 +6,10 @@ import java.util.Comparator;
 
 public class TodoList {
     private ArrayList<Task> tasks = new ArrayList<>();
-    private int idCounter = 0; // gives unique ids to tasks
+    private int idCounter = 1; // gives unique ids to tasks
 
     ArrayList<Task> addTask(Task t) {
+        t.setId(idCounter++);
         tasks.add(t);
         return tasks;
     }
@@ -79,6 +80,34 @@ public class TodoList {
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getName().equals(taskName)) {
                 return tasks.remove(i);
+            }
+        }
+        return null;
+    }
+
+    Task getTaskId(int id) {
+        for (Task t : tasks) {
+            if (t.getId() == id)
+                return t;
+        }
+        return null;
+    }
+
+    Task changeTaskName(int id, String newName) {
+        for (Task t : tasks) {
+            if (t.getId() == id) {
+                t.changeName(newName);
+                return t;
+            }
+        }
+        return null;
+    }
+
+    Task setTaskStatus(boolean completed, int id) {
+        for (Task t : tasks) {
+            if (t.getId() == id) {
+                t.setStatus(completed);
+                return t;
             }
         }
         return null;

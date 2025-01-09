@@ -179,7 +179,7 @@ public class TodoListExtensionTest {
         todoList.addTask(task2);
         todoList.addTask(task3);
 
-        Assertions.assertEquals("b", todoList.getTaskId(2));
+        Assertions.assertEquals("b", todoList.getTaskId(2).getName());
     }
 
     @Test
@@ -201,15 +201,15 @@ public class TodoListExtensionTest {
     void testChangeExistingTaskName() {
         TodoList todoList = new TodoList();
 
-        Task task1 = new Task("a", 1);
-        Task task2 = new Task("b", 2);
-        Task task3 = new Task("c", 3);
+        Task task1 = new Task("a");
+        Task task2 = new Task("b");
+        Task task3 = new Task("c");
 
         todoList.addTask(task1);
         todoList.addTask(task2);
         todoList.addTask(task3);
 
-        Assertions.assertEquals("d", todoList.changeTaskName(3, "d").getName());
+        Assertions.assertEquals("d", todoList.changeTaskName(task3.getId(), "d").getName());
     }
 
     @Test
@@ -231,16 +231,16 @@ public class TodoListExtensionTest {
     void testSetExistingTaskStatus() {
         TodoList todoList = new TodoList();
 
-        Task task1 = new Task("a", 1);
-        Task task2 = new Task("b", 2);
-        Task task3 = new Task("c", 3);
+        Task task1 = new Task("a");
+        Task task2 = new Task("b");
+        Task task3 = new Task("c");
 
         todoList.addTask(task1);
         todoList.addTask(task2);
         todoList.addTask(task3);
 
-        Assertions.assertTrue(todoList.setTaskStatus(true, 3).isComplete());
-        Assertions.assertFalse(todoList.setTaskStatus(false, 3).isComplete());
+        Assertions.assertTrue(todoList.setTaskStatus(true, task2.getId()).isComplete());
+        Assertions.assertFalse(todoList.setTaskStatus(false, task2.getId()).isComplete());
     }
     @Test
 
