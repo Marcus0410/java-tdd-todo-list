@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TodoList {
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -45,10 +47,22 @@ public class TodoList {
     }
 
     ArrayList<Task> getAllAscending() {
+        Collections.sort(tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return t1.getName().compareToIgnoreCase(t2.getName());
+            }
+        });
         return tasks;
     }
 
     ArrayList<Task> getAllDescending() {
+        Collections.sort(tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return t2.getName().compareToIgnoreCase(t1.getName());
+            }
+        });
         return tasks;
     }
 
