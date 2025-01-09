@@ -40,6 +40,7 @@ class TodoListTest {
 
         Task task1 = new Task("task1");
         todoList.addTask(task1);
+        todoList.completeTask("task1");
 
         Assertions.assertTrue(todoList.getAll().get(0).isComplete());
     }
@@ -110,8 +111,8 @@ class TodoListTest {
         Task task3 = new Task("c");
 
         todoList.addTask(task1);
-        todoList.addTask(task2);
         todoList.addTask(task3);
+        todoList.addTask(task2);
 
         ArrayList<Task> tasks = todoList.getAllAscending();
 
