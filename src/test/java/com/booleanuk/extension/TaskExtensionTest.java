@@ -1,6 +1,7 @@
 package com.booleanuk.extension;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Assertions;
@@ -54,8 +55,8 @@ public class TaskExtensionTest {
     @Test
     void testGetTimeCreated() {
         Task task = new Task("task1");
-        LocalDateTime now = LocalDateTime.now();
         LocalDateTime time = task.getTimeCreated();
+        LocalDateTime now = LocalDateTime.now();
 
         try {
             TimeUnit.SECONDS.sleep(1);
@@ -65,7 +66,7 @@ public class TaskExtensionTest {
 
         Task task2 = new Task("task2");
 
-        Assertions.assertEquals(now, time);
+        Assertions.assertTrue(Math.abs(ChronoUnit.MILLIS.between(time, now)) < 50);
         Assertions.assertNotEquals(time, task2.getTimeCreated());
     }
 
