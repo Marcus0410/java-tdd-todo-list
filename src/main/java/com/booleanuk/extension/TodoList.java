@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 public class TodoList {
     private ArrayList<Task> tasks = new ArrayList<>();
+    private int idCounter = 0; // gives unique ids to tasks
 
     ArrayList<Task> addTask(Task t) {
         tasks.add(t);

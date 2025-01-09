@@ -58,4 +58,12 @@ public class TaskExtensionTest {
 
         Assertions.assertEquals(now, time);
     }
+
+    @Test
+    void testSetId() {
+        Task task = new Task("task1");
+        
+        task.setId(777);
+        Assertions.assertEquals(777, task.getId());
+    }
 }
