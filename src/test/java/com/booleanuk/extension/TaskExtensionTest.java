@@ -1,6 +1,7 @@
 package com.booleanuk.extension;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,16 @@ public class TaskExtensionTest {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime time = task.getTimeCreated();
 
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        Task task2 = new Task("task2");
+
         Assertions.assertEquals(now, time);
+        Assertions.assertNotEquals(time, task2.getTimeCreated());
     }
 
     @Test
