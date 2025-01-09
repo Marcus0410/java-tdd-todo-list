@@ -45,4 +45,8 @@ public class Task {
     LocalDateTime getTimeCreated() {
         return timeCreated;
     }
+
+    void setId(int id) {
+        this.id = id;
+    }
 }
