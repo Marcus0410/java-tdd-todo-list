@@ -14,9 +14,9 @@ class TodoListTest {
         Task task2 = new Task("task2");
         Task task3 = new Task("task3");
 
-        todoList.add(task1);
-        todoList.add(task2);
-        todoList.add(task3);
+        todoList.addTask(task1);
+        todoList.addTask(task2);
+        todoList.addTask(task3);
 
         ArrayList<Task> tasks = todoList.getAll();
 
@@ -41,7 +41,7 @@ class TodoListTest {
         Task task1 = new Task("task1");
         todoList.addTask(task1);
 
-        Assertions.assertTrue(todoList.getAll(0).isComplete());
+        Assertions.assertTrue(todoList.getAll().get(0).isComplete());
     }
 
     @Test
@@ -52,9 +52,9 @@ class TodoListTest {
         Task task2 = new Task("task2");
         Task task3 = new Task("task3");
 
-        todoList.add(task1);
-        todoList.add(task2);
-        todoList.add(task3);
+        todoList.addTask(task1);
+        todoList.addTask(task2);
+        todoList.addTask(task3);
 
         todoList.completeTask("task1");
 
@@ -72,17 +72,17 @@ class TodoListTest {
         Task task2 = new Task("task2");
         Task task3 = new Task("task3");
 
-        todoList.add(task1);
-        todoList.add(task2);
-        todoList.add(task3);
+        todoList.addTask(task1);
+        todoList.addTask(task2);
+        todoList.addTask(task3);
 
         todoList.completeTask("task1");
 
         ArrayList<Task> incompleted = todoList.getIncompleted();
 
-        Assertions.assertEquals("task2", completed.get(0).getName());
-        Assertions.assertEquals("task3", completed.get(1).getName());
-        Assertions.assertEquals(2, completed.size());
+        Assertions.assertEquals("task2", incompleted.get(0).getName());
+        Assertions.assertEquals("task3", incompleted.get(1).getName());
+        Assertions.assertEquals(2, incompleted.size());
     }
 
     @Test
@@ -93,9 +93,9 @@ class TodoListTest {
         Task task2 = new Task("task2");
         Task task3 = new Task("task3");
 
-        todoList.add(task1);
-        todoList.add(task2);
-        todoList.add(task3);
+        todoList.addTask(task1);
+        todoList.addTask(task2);
+        todoList.addTask(task3);
 
         Assertions.assertTrue(todoList.search("task1"));
         Assertions.assertFalse(todoList.search("task0"));
@@ -109,9 +109,9 @@ class TodoListTest {
         Task task2 = new Task("b");
         Task task3 = new Task("c");
 
-        todoList.add(task1);
-        todoList.add(task2);
-        todoList.add(task3);
+        todoList.addTask(task1);
+        todoList.addTask(task2);
+        todoList.addTask(task3);
 
         ArrayList<Task> tasks = todoList.getAllAscending();
 
@@ -128,9 +128,9 @@ class TodoListTest {
         Task task2 = new Task("b");
         Task task3 = new Task("c");
 
-        todoList.add(task1);
-        todoList.add(task2);
-        todoList.add(task3);
+        todoList.addTask(task1);
+        todoList.addTask(task2);
+        todoList.addTask(task3);
 
         ArrayList<Task> tasks = todoList.getAllDescending();
 
@@ -147,9 +147,9 @@ class TodoListTest {
         Task task2 = new Task("b");
         Task task3 = new Task("c");
 
-        todoList.add(task1);
-        todoList.add(task2);
-        todoList.add(task3);
+        todoList.addTask(task1);
+        todoList.addTask(task2);
+        todoList.addTask(task3);
 
 
         Assertions.assertEquals("b", todoList.removeTask("b").getName());
