@@ -49,23 +49,20 @@ public class TodoList {
     }
 
     ArrayList<Task> getAllAscending() {
-        Collections.sort(tasks, new Comparator<Task>() {
+        ArrayList<Task> ascending = new ArrayList<>(tasks);
+        Collections.sort(ascending, new Comparator<Task>() {
             @Override
             public int compare(Task t1, Task t2) {
                 return t1.getName().compareToIgnoreCase(t2.getName());
             }
         });
-        return tasks;
+        return ascending;
     }
 
     ArrayList<Task> getAllDescending() {
-        Collections.sort(tasks, new Comparator<Task>() {
-            @Override
-            public int compare(Task t1, Task t2) {
-                return t2.getName().compareToIgnoreCase(t1.getName());
-            }
-        });
-        return tasks;
+        ArrayList<Task> descending = getAllAscending();
+        Collections.reverse(descending);
+        return descending;
     }
 
     boolean search(String taskName) {
@@ -94,22 +91,24 @@ public class TodoList {
     }
 
     Task changeTaskName(int id, String newName) {
-        for (Task t : tasks) {
-            if (t.getId() == id) {
-                t.changeName(newName);
-                return t;
-            }
+        Task t = getTaskId(id);
+
+        if (t != null) {
+            t.changeName(newName);
+            return t;
         }
+
         return null;
     }
 
     Task setTaskStatus(boolean completed, int id) {
-        for (Task t : tasks) {
-            if (t.getId() == id) {
-                t.setStatus(completed);
-                return t;
-            }
+        Task t = getTaskId(id);
+
+        if (t != null) {
+            t.setStatus(completed);
+            return t;
         }
+
         return null;
     }
 }
